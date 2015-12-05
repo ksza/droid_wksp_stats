@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import ro.ksza.stats.list.StatsFragment;
 import ro.ksza.stats.model.Person;
 import ro.ksza.stats.model.StatsDao;
 
@@ -21,6 +22,8 @@ public class DataCollectionActivity extends AppCompatActivity {
     private EditText nameField, ageField;
     private Button saveButton;
     private FloatingActionButton fab;
+
+    private StatsFragment fragment;
 
     private CoordinatorLayout coordinatorLayout;
 
@@ -38,6 +41,8 @@ public class DataCollectionActivity extends AppCompatActivity {
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coord);
         fab = (FloatingActionButton) findViewById(R.id.stats_button);
 
+        fragment = (StatsFragment) getFragmentManager().findFragmentById(R.id.stats_fragment);
+
         findViewById(R.id.add_to_db).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +57,8 @@ public class DataCollectionActivity extends AppCompatActivity {
                 startStatsActivity();
             }
         });
+
+        fragment.dataReady(dao.readAll());
     }
 
     private void startStatsActivity() {
@@ -67,6 +74,8 @@ public class DataCollectionActivity extends AppCompatActivity {
 
         Person person = new Person(rawName, rawAge);
         final long generatedId = dao.writePerson(person);
+
+        fragment.itemReady(person);
 
         confirmAndUndo(generatedId);
     }

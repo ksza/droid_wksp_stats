@@ -49,6 +49,13 @@
             android:layout_below="@id/input_layout_age"
             android:text="Save" />
 
+        <fragment
+            android:id="@+id/stats_fragment"
+            android:layout_below="@id/add_to_db"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="ro.ksza.stats.list.StatsFragment" />
+
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
