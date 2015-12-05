@@ -55,6 +55,10 @@ public class StatsActivity extends AppCompatActivity {
 
                 final int position = viewHolder.getAdapterPosition();
                 final Person item = adapter.getItemAt(position);
+
+                if(statsDao.deleteById(item.getId()) != 0) {
+                    adapter.removeItemAt(position);
+                }
             }
         };
 

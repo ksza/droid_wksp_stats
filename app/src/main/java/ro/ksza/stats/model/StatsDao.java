@@ -82,8 +82,11 @@ public class StatsDao {
             final int age = cursor.getInt(
                     cursor.getColumnIndexOrThrow(EntryContract.Entry.COLUMN_NAME_PERSON_AGE)
             );
+            final long id = cursor.getLong(
+                    cursor.getColumnIndexOrThrow(EntryContract.Entry._ID)
+            );
 
-            final Person person = new Person(name, age);
+            final Person person = new Person(name, age, id);
             result.add(person);
 
             Log.d(TAG, "Read person: " + person);

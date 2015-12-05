@@ -2,6 +2,7 @@ package ro.ksza.stats.model;
 
 public class Person {
 
+    private long id;
     private final String name;
     private final int age;
 
@@ -10,12 +11,22 @@ public class Person {
         this.age = age;
     }
 
+    public Person(final String name, final int age, long id) {
+        this.name = name;
+        this.age = age;
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
 
     public int getAge() {
         return age;
+    }
+
+    public long getId() {
+        return id;
     }
 
     @Override
