@@ -6,14 +6,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import ro.ksza.stats.list.MoviesAdapter;
+import ro.ksza.stats.model.StatsDao;
 
 public class StatsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-
     private MoviesAdapter adapter;
-
     private LinearLayoutManager layoutManager;
+
+    private StatsDao statsDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,9 @@ public class StatsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stats);
 
         setUpRecycler();
+
+        statsDao = new StatsDao(this);
+        adapter.setItems(statsDao.readAll());
     }
 
     private void setUpRecycler() {
@@ -31,4 +35,6 @@ public class StatsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
+
+    
 }
